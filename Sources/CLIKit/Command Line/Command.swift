@@ -223,7 +223,7 @@ internal class InternalNamedCommands: InternalCommands, Commands {
         
     func run() throws {
         do {
-            try originalCommand.run()
+            try originalCommands.run()
         } catch CommandLineError.usageRequested {
             throw CommandLineError.usageRequested(command: self)
         }

@@ -56,7 +56,7 @@ public final class CommandLineParser {
         
         switch resultingState {
         case .success(let context):
-            return context.currentCommand.originalCommand
+            return context.currentCommand
         case .failure(let error):
             throw error
         default:

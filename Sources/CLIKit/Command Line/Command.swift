@@ -146,11 +146,7 @@ internal class InternalNamedCommand: InternalCommand, Command {
     }
         
     func run() throws {
-        do {
-            try originalCommand.run()
-        } catch CommandLineError.usageRequested(let command) where command === originalCommand {
-            throw CommandLineError.usageRequested(command: self)
-        }
+        try originalCommand.run()
     }
     
     var flags: [CommandFlagSpecification] {
@@ -226,7 +222,11 @@ internal class InternalNamedCommands: InternalCommands, Commands {
     }
         
     func run() throws {
-        try originalCommands.run()
+        do {
+            try originalCommand.run()
+        } catch CommandLineError.usageRequested(let command) where command === originalCommand {
+            throw CommandLineError.usageRequested(command: self)
+        }
     }
     
     subscript(name: String) -> Command? {

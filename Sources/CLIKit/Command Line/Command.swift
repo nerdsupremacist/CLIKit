@@ -120,6 +120,7 @@ public extension Commands {
     }
         
     func run() throws {
+        throw CommandLineError.usageRequested(command: self)
     }
 }
 
@@ -145,7 +146,11 @@ internal class InternalNamedCommand: InternalCommand, Command {
     }
         
     func run() throws {
-        try originalCommand.run()
+        do {
+            try originalCommand.run()
+        } catch CommandLineError.usageRequested(let command) where command === originalCommand {
+            throw CommandLineError.usageRequested(command: self)
+        }
     }
     
     var flags: [CommandFlagSpecification] {

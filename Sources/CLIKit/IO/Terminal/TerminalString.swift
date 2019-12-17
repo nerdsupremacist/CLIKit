@@ -81,5 +81,9 @@ extension TerminalString: ExpressibleByStringInterpolation {
         public mutating func appendInterpolation(_ value: CustomStringConvertible) {
             fragments.append(.string(value.description))
         }
+
+        public mutating func appendInterpolation(_ value: TerminalString) {
+            fragments.append(contentsOf: value.fragments)
+        }
     }
 }

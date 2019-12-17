@@ -224,7 +224,7 @@ internal class InternalNamedCommands: InternalCommands, Commands {
     func run() throws {
         do {
             try originalCommand.run()
-        } catch CommandLineError.usageRequested(let command) where command === originalCommand {
+        } catch CommandLineError.usageRequested {
             throw CommandLineError.usageRequested(command: self)
         }
     }

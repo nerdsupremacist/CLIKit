@@ -282,13 +282,13 @@ public final class CommandLineParser {
     }
     
     private func getFlag(correspondingTo argument: String, command: InternalCommand) throws -> CommandFlagSpecification? {
-        guard !(command is Commands) else {
-            return nil
-        }
-        
         // Special treatment of the -h / --help flag.
         if argument == "--help" || argument == "-h" {
             throw StateError(.scannedHelpFlag(command), argument)
+        }
+
+        guard !(command is Commands) else {
+            return nil
         }
         
         let mirror = Mirror(reflecting: command.originalCommand)

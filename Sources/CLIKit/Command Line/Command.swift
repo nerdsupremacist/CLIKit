@@ -146,7 +146,11 @@ internal class InternalNamedCommand: InternalCommand, Command {
     }
         
     func run() throws {
-        try originalCommand.run()
+        do {
+            try originalCommand.run()
+        } catch CommandLineError.usageRequested {
+            throw CommandLineError.usageRequested(command: self)
+        }
     }
     
     var flags: [CommandFlagSpecification] {

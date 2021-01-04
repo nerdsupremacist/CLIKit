@@ -14,7 +14,7 @@ extension Float: CommandArgumentValue {
     }
 }
 
-#if os(macOS) || os(Linux)
+#if arch(x86_64)
 
 extension Float80: CommandArgumentValue {
     
